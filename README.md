@@ -1,10 +1,8 @@
-Es un clon de la aplicación de google (google keep notes), no tiene todas las funcionalidades pero sí las más importantes.
-Solo lo hice para dispositivos mobile, es decir, no tiene interfaz de escritorio.
+# React + Vite
 
-Este es un proyecto que funciona con LocalStorage, no tiene base de datos, aunque tengo conocimientos de mongoDB y ya he hecho proyectos un poco más completos,
-lo quise hacer para practicar el drag and drop, me ayudó a entender muchas cosas de React, del useState
-y de funcionalidades que se suelen usar en una aplicación, en este caso web.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Se puede clonar el repositorio e inmediatamente usarlo, se deben instalar las dependencias (npm install).
+Currently, two official plugins are available:
 
-
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
