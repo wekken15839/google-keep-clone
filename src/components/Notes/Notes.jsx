@@ -18,9 +18,9 @@ const Notes = () => {
   );
 };
 
-export const NotesList = ({ notes }) => {
+export const NotesList = ({ notes, isSectioned }) => {
   const { handleNoteSelect, isSelectionMode } = useNotes();
-  const fixedNotes = notes.filter((note) => note.isFixed);
+  const fixedNotes = notes.filter((note) => note?.isFixed);
   const otherNotes = notes.filter((note) => !note.isFixed);
 
   return (
@@ -30,6 +30,7 @@ export const NotesList = ({ notes }) => {
           title={"Fijadas"}
           notes={fixedNotes}
           isSelectionMode={isSelectionMode}
+          isSectioned={isSectioned}
         />
       )}
       {otherNotes.length > 0 && (
@@ -37,16 +38,17 @@ export const NotesList = ({ notes }) => {
           title={"Otras"}
           notes={otherNotes}
           isSelectionMode={isSelectionMode}
+          isSectioned={isSectioned}
         />
       )}
     </ul>
   );
 };
 
-const NotesSection = ({ title, notes, isSelectionMode }) => {
+const NotesSection = ({ title, notes, isSelectionMode, isSectioned }) => {
   return (
     <>
-      <span>{title}</span>
+      {isSectioned && <span>{title}</span>}
       {notes.map((note) =>
         isSelectionMode ? (
           <Note note={note} key={note.id} />

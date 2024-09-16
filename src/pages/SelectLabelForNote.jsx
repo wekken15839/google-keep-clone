@@ -31,7 +31,7 @@ const SelectLabelForNote = () => {
             {labelsInThisNote.includes(label.id) ? (
               <MdCheckBox
                 onClick={() => {
-                  toggleLabelForNote(label.id);
+                  toggleLabelForNote(label.id, noteId);
                 }}
               />
             ) : (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiPin, BiSolidPin } from "react-icons/bi";
 import { FaXmark } from "react-icons/fa6";
 import { IoMdColorPalette } from "react-icons/io";
@@ -6,7 +6,7 @@ import { MdNotificationAdd, MdOutlineLabel } from "react-icons/md";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useNotes } from "../../context/NotesProvider";
 import { IoCloseSharp } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const SelectedNotesMenu = () => {
   const { selectedNotes, exitSelectionMode, toggleFixedNotes, notes } =
@@ -14,7 +14,7 @@ const SelectedNotesMenu = () => {
   const { noteId } = useParams();
 
   const areAllSelectedNotesFixed = () => {
-    const selectedNotesObjects = notes.map((note) =>
+    const selectedNotesObjects = notes.filter((note) =>
       selectedNotes.includes(note.id)
     );
 
@@ -34,15 +34,15 @@ const SelectedNotesMenu = () => {
           <span className="mb-0.5">{selectedNotes.length}</span>
         </div>
         <div className="flex gap-5">
-          {!areAllSelectedNotesFixed() ? (
-            <BiPin onClick={() => toggleFixedNotes(noteId)} />
-          ) : (
+          {areAllSelectedNotesFixed() ? (
             <BiSolidPin onClick={() => toggleFixedNotes(noteId)} />
+          ) : (
+            <BiPin onClick={() => toggleFixedNotes(noteId)} />
           )}
 
-          <MdNotificationAdd />
-          <IoMdColorPalette />
-          <MdOutlineLabel />
+          <Link to={"/notes/select-label"}>
+            <MdOutlineLabel />
+          </Link>
           <MenuDropDown />
         </div>
       </div>
@@ -52,7 +52,12 @@ const SelectedNotesMenu = () => {
 
 const MenuDropDown = () => {
   const [isActive, setIsActive] = useState(false);
-  const { deleteSelectedNotes, selectedNotes, copySelectedNote } = useNotes();
+  const {
+    deleteSelectedNotes,
+    selectedNotes,
+    copySelectedNote,
+    toArchiveSelectedsNotes,
+  } = useNotes();
 
   return (
     <div className="relative inline-block text-left text-base">
@@ -69,9 +74,6 @@ const MenuDropDown = () => {
         } absolute right-0 top-7 z-10 w-56  rounded-md bg-blue-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
       >
         <div className="py-1" role="none">
-          <div href="#" className="block px-4 py-2  text-gray-700">
-            Archivar
-          </div>
           <div
             className="block px-4 py-2  text-gray-700"
             onClick={() => deleteSelectedNotes()}
@@ -85,9 +87,6 @@ const MenuDropDown = () => {
                 onClick={copySelectedNote}
               >
                 Crear una copia
-              </div>
-              <div className="block w-full px-4 py-2 text-left  text-gray-700">
-                Enviar
               </div>
             </div>
           )}

@@ -90,28 +90,12 @@ const SideBar = () => {
               <div>Viajes</div>
             </div>
           </Option> */}
-          <Option>
-            <FaPlus />
-            <div className="">Crear etiqueta nueva</div>
-          </Option>
-        </Section>
-        <Section>
-          <Option>
-            <RiInboxArchiveLine />
-            <div>Archivar</div>
-          </Option>
-          <Option>
-            <FaRegTrashAlt />
-            <div>Papelera</div>
-          </Option>
-          <Option>
-            <MdOutlineSettings />
-            <div>Configuración</div>
-          </Option>
-          <Option>
-            <FaRegQuestionCircle />
-            <div>Ayuda y comentarios</div>
-          </Option>
+          <Link to={"/labels/create-label"} onClick={toggleSideBar}>
+            <Option>
+              <FaPlus />
+              <div className="">Crear etiqueta nueva</div>
+            </Option>
+          </Link>
         </Section>
       </div>
     </motion.div>

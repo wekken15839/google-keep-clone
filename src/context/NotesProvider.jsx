@@ -29,6 +29,12 @@ const initialNotes = [
   },
 ];
 
+const initialLabels = [
+  { id: "label1", name: "Travel", notes: [] },
+  { id: "label2", name: "Completed", notes: [] },
+  { id: "label3", name: "Learning", notes: [] },
+];
+
 export default function NotesProvider({ children }) {
   // ? <STATES>
   const [notes, setNotes] = useState(() => {
@@ -46,19 +52,13 @@ export default function NotesProvider({ children }) {
 
   const [selectedNotes, setSelectedNotes] = useState([]);
 
-  const [labels, setLabels] = useState([
-    { id: "label1", name: "Travel", notes: [] },
-    { id: "label2", name: "Completed", notes: [] },
-    { id: "label3", name: "Learning", notes: [] },
-  ]);
-
-  const getLabels = (noteId) => {
-    const foundNote = notes.find((note) => note.id == noteId);
-
-    if (!foundNote) return [];
-
-    return foundNote.labelIds;
-  };
+  const [labels, setLabels] = useState(() => {
+    const savedLabels = localStorage.getItem("savedLabels");
+    if (!savedLabels) {
+      localStorage.setItem("savedLabels", JSON.stringify(initialLabels));
+    }
+    return savedLabels ? JSON.parse(savedLabels) : initialLabels;
+  });
 
   // ? </STATES>
 
@@ -80,6 +80,20 @@ export default function NotesProvider({ children }) {
       updatedNotesInLocalStorage(updatedNotes);
       exitSelectionMode();
       return updatedNotes;
+    });
+  };
+
+  const allSelectedNotesHaveLabel = (labelId) => {
+    return selectedNotes.every((noteId) => {
+      const note = notes.find((note) => note.id === noteId);
+      return note?.labelIds.includes(labelId);
+    });
+  };
+
+  const noneSelectedNotesHaveLabel = (labelId) => {
+    return selectedNotes.every((noteId) => {
+      const note = notes.find((note) => note.id === noteId);
+      return !note?.labelIds.includes(labelId);
     });
   };
 
@@ -109,7 +123,6 @@ export default function NotesProvider({ children }) {
         }
         return note;
       });
-
       updatedNotesInLocalStorage(updatedNotes); // Si usas esta función para sincronizar con el localStorage
       return updatedNotes;
     });
@@ -377,13 +390,12 @@ export default function NotesProvider({ children }) {
 
   // * <LABELS>
 
-  const createLabel = (labelName) => {
-    const newLabel = {
-      id: Date.now().toString(), // Genera un ID único
-      name: labelName,
-    };
+  const getLabels = (noteId) => {
+    const foundNote = notes.find((note) => note.id == noteId);
 
-    setLabels((prevLabels) => [...prevLabels, newLabel]);
+    if (!foundNote) return [];
+
+    return foundNote.labelIds;
   };
 
   const toggleLabelForNote = (labelId, noteId) => {
@@ -414,6 +426,9 @@ export default function NotesProvider({ children }) {
   // * <UTILS>
   const updatedNotesInLocalStorage = (notes) => {
     localStorage.setItem("savedNotes", JSON.stringify(notes));
+  };
+  const updatedLabelsInLocalStorage = (labels) => {
+    localStorage.setItem("savedLabels", JSON.stringify(labels));
   };
 
   const exitSelectionMode = () => {
@@ -453,6 +468,10 @@ export default function NotesProvider({ children }) {
         toggleLabelForNote,
         toggleFixedNotes,
         copySelectedNote,
+        noneSelectedNotesHaveLabel,
+        allSelectedNotesHaveLabel,
+        setLabels,
+        updatedLabelsInLocalStorage,
       }}
     >
       {children}
