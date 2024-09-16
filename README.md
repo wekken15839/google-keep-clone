@@ -1,8 +1,7 @@
-# React + Vite
+Clon de la aplicación Google-Keep.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto hecho en React + Vite, tiene muy pocas dependencias, funciona con solo con LocalStorage, es decir, no necesita de bases de datos.
+Aunque ya he hecho proyectos más complejos, y con bases de datos, este es un proyecto que tiene varios retos que me sirvieron para practicar y mejorar, como por ejemplo el Drag and drop de las tareas que están en las notas, el enrutado con React Router Dom, 
+estilado con TailwindCSS, animación (aunque muy breve) con Framer Motion, entre otras herramientas más.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Se puede clonar el repositorio e inmediatamente usarlo, se deben instalar las dependencias (npm install).
