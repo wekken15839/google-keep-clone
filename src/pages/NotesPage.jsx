@@ -5,10 +5,9 @@ import Tasks from "../components/Tasks/Tasks";
 import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import { useNotes } from "../context/NotesProvider";
 import TopBar from "../components/Tasks/TopBar";
-import TaskMenu from "../components/Tasks/TaskMenu";
 import NoteMenu from "../components/Notes/NoteMenu";
 
-export default function Notes() {
+const NotesPage = () => {
   const { getNote, notes } = useNotes();
   const { noteId } = useParams();
   // const navigate = useNavigate();
@@ -25,13 +24,16 @@ export default function Notes() {
   // if (!note) return <Navigate to={"/"} />;
 
   return (
-    <div className="p-3">
+    <div className="">
       <ListsNavBar />
       <SideBar />
-      <TopBar />
-      <Tasks />
-      <TaskMenu />
+      <div className="p-3">
+        <TopBar />
+        <Tasks />
+      </div>
       <NoteMenu />
     </div>
   );
-}
+};
+
+export default NotesPage;

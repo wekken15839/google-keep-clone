@@ -17,7 +17,7 @@ import { useNotes } from "../../context/NotesProvider";
 
 const SideBar = () => {
   const { pathname } = useLocation();
-  const { noteId } = useParams();
+  const { labelId } = useParams();
   const { labels } = useNotes();
 
   const { isSidebarVisible, toggleSideBar } = useSideBar();
@@ -31,9 +31,7 @@ const SideBar = () => {
   return (
     <motion.div
       animate={isSidebarVisible ? { left: 0 } : { left: "-400px" }}
-      className={`flex fixed ${
-        isSidebarVisible ? "left-0" : "left-[-400px]"
-      } top-0 flex-col w-[380px] bg-gray-100 h-screen`}
+      className={`flex fixed left-[-400px] top-0 flex-col min-w-[380px]  bg-gray-100 h-screen`}
     >
       <div className="px-4 py-3">
         <h1 className="flex text-2xl gap-2 font-semibold mb-4 justify-between items-center">
@@ -76,7 +74,7 @@ const SideBar = () => {
                 key={label.id}
                 onClick={toggleSideBar}
               >
-                <Option>
+                <Option isSelected={label.id == labelId}>
                   <div className="flex gap-5 items-center">
                     <MdOutlineLabel />
                     <div>{label.name}</div>
@@ -84,12 +82,6 @@ const SideBar = () => {
                 </Option>
               </Link>
             ))}
-          {/* <Option isSelected={pathname == `/labels/${noteId}`}>
-            <div className="flex gap-5 items-center">
-              <MdOutlineLabel />
-              <div>Viajes</div>
-            </div>
-          </Option> */}
           <Link to={"/labels/create-label"} onClick={toggleSideBar}>
             <Option>
               <FaPlus />

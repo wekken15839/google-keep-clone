@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { BiLabel, BiPlus, BiTrash } from "react-icons/bi";
-import { CiShare2 } from "react-icons/ci";
-import { FiUserPlus } from "react-icons/fi";
 import { IoMdColorPalette } from "react-icons/io";
 import { MdContentCopy } from "react-icons/md";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -35,7 +33,6 @@ const NoteMenu = () => {
 const MenuPopup = ({ togglePopup }) => {
   const { noteId } = useParams();
   const { deleteNote, addNote, getNote } = useNotes();
-  const [isLabelPopupVisible, setIsLabelPopupVisible] = useState(false);
 
   const navigate = useNavigate();
 

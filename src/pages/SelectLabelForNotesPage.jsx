@@ -10,7 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { CiSquareMinus } from "react-icons/ci";
 
-const SelectLabelForNotes = () => {
+const SelectLabelForNotesPage = () => {
   const {
     toggleLabelForSelectedNotes,
     selectedNotes,
@@ -72,4 +72,4 @@ const Menu = () => {
   );
 };
 
-export default SelectLabelForNotes;
+export default SelectLabelForNotesPage;

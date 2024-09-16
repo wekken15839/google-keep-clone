@@ -53,7 +53,7 @@ const Tasks = () => {
       />
       <TasksList tasks={tasks} />
       <div
-        className="flex items-center gap-2 pl-6"
+        className="flex items-center gap-2 pl-6 cursor-pointer"
         onClick={() => addTask(noteId)}
       >
         <TiPlus />
@@ -184,9 +184,15 @@ const Task = ({ id, title, completed, description, noteId }) => {
         className="cursor-move"
       />
       {completed ? (
-        <RiCheckboxFill onClick={() => toggleCompleteTask(noteId, id)} />
+        <RiCheckboxFill
+          className="cursor-pointer"
+          onClick={() => toggleCompleteTask(noteId, id)}
+        />
       ) : (
-        <RiCheckboxBlankLine onClick={() => toggleCompleteTask(noteId, id)} />
+        <RiCheckboxBlankLine
+          className="cursor-pointer"
+          onClick={() => toggleCompleteTask(noteId, id)}
+        />
       )}
       <input
         value={title}
@@ -197,7 +203,7 @@ const Task = ({ id, title, completed, description, noteId }) => {
       />
       {isInputFocused && (
         <div
-          className="ml-auto"
+          className="ml-auto cursor-pointer"
           onMouseDown={handleMouseDownOnIcon}
           onMouseUp={handleMouseUpOnIcon}
           onClick={() => deleteTask(noteId, id)}

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
-export default function Login() {
+const LoginPage = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
@@ -13,4 +13,6 @@ export default function Login() {
   }, [isAuthenticated]);
 
   return <div>Login</div>;
-}
+};
+
+export default LoginPage;

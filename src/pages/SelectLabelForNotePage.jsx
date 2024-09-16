@@ -9,7 +9,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
-const SelectLabelForNote = () => {
+const SelectLabelForNotePage = () => {
   const { labels, toggleLabelForNote, getLabels } = useNotes();
   const { noteId } = useParams();
 
@@ -54,12 +54,13 @@ const Menu = ({ noteId }) => {
       <Link to={`/notes/${noteId}`}>
         <IoArrowBack />
       </Link>
-      <input
+      {/* <input
         placeholder="Ingresar el nombre de la etiqueta"
         className="w-full"
-      />
+      /> */}
+      <span>Selecciona la etiqueta</span>
     </div>
   );
 };
 
-export default SelectLabelForNote;
+export default SelectLabelForNotePage;
