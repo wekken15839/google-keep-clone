@@ -5,22 +5,20 @@ import { NotesList } from "../components/Notes/Notes";
 import { useParams } from "react-router-dom";
 import SideBar from "../components/SideBar/SideBar";
 
-const Labels = () => {
+const LabelsPage = () => {
   const { getNotesByLabelId } = useNotes();
 
   const { labelId } = useParams();
 
   const notes = getNotesByLabelId(labelId);
 
-  
-
   return (
     <div className="p-3">
       <LabelsNavBar />
-      <SideBar/>
+      <SideBar />
       <NotesList notes={notes} />
     </div>
   );
 };
 
-export default Labels;
+export default LabelsPage;
