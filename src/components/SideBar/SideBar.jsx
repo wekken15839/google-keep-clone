@@ -31,7 +31,7 @@ const SideBar = () => {
   return (
     <motion.div
       animate={isSidebarVisible ? { left: 0 } : { left: "-400px" }}
-      className={`flex fixed left-[-400px] top-0 flex-col min-w-[380px]  bg-gray-100 h-screen`}
+      className={`flex fixed left-[-400px] top-0 flex-col min-w-[375px]  bg-gray-100 h-screen`}
     >
       <div className="px-4 py-3">
         <h1 className="flex text-2xl gap-2 font-semibold mb-4 justify-between items-center">
@@ -56,7 +56,7 @@ const SideBar = () => {
         </h1>
         <Section>
           <Link to={"/notes"} onClick={toggleSideBar}>
-            <Option isSelected={pathname == "/notes"}>
+            <Option isSelected={pathname == "/notes" || pathname == "/"}>
               <FaRegLightbulb />
               <div className="">Listas</div>
             </Option>
